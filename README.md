@@ -18,8 +18,8 @@ Program terdiri dari 1 class, yaitu class **Mahasiswa**. Class ini memiliki 3 at
 5. Setelah itu akan muncul comfirmation prompt untuk mengonfirmasi apakah benar ingin menghapus data atau tidak. Jika iya, maka data akan berhasil dihapus.
 
 ## Dokumentasi
-![image1] (screenshot/img1.png)
-![image2] (screenshot/img2.png)
-![image3] (screenshot/img3.png)
-![image4] (screenshot/img4.png)
-![image5] (screenshot/img5.png)
+![image1](screenshot/img1.png)
+![image2](screenshot/img2.png)
+![image3](screenshot/img3.png)
+![image4](screenshot/img4.png)
+![image5](screenshot/img5.png)
