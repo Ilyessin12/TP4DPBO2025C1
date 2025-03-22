@@ -2,11 +2,13 @@ public class Mahasiswa {
     private String nim;
     private String nama;
     private String jenisKelamin;
+    private String faction;
 
-    public Mahasiswa(String nim, String nama, String jenisKelamin) {
+    public Mahasiswa(String nim, String nama, String jenisKelamin, String faction) {
         this.nim = nim;
         this.nama = nama;
         this.jenisKelamin = jenisKelamin;
+        this.faction = faction;
     }
 
     public void setNim(String nim) {
@@ -21,6 +23,10 @@ public class Mahasiswa {
         this.jenisKelamin = jenisKelamin;
     }
 
+    public void setFaction(String faction) {
+        this.faction = faction;
+    }
+
     public String getNim() {
         return this.nim;
     }
@@ -31,5 +37,9 @@ public class Mahasiswa {
 
     public String getJenisKelamin() {
         return this.jenisKelamin;
+    }
+
+    public String getFaction() {
+        return this.faction;
     }
 }

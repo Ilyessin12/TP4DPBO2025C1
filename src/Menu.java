@@ -42,6 +42,10 @@ public class Menu extends JFrame{
     private JLabel nimLabel;
     private JLabel namaLabel;
     private JLabel jenisKelaminLabel;
+    private JLabel factionLabel;
+    private JRadioButton factionRadioButton1;
+    private JRadioButton factionRadioButton2;
+    private JRadioButton factionRadioButton3;
 
     // constructor
     public Menu() {
@@ -60,6 +64,11 @@ public class Menu extends JFrame{
         // atur isi combo box
         String[] jenisKelaminData = {"", "Laki-laki", "Perempuan"};
         jenisKelaminComboBox.setModel(new DefaultComboBoxModel(jenisKelaminData));
+
+        // atur isi radio button
+        factionRadioButton1.setText("URNC");
+        factionRadioButton2.setText("Yharnam");
+        factionRadioButton3.setText("Committee of 300");
 
         // sembunyikan button delete
         deleteButton.setVisible(false);
@@ -105,11 +114,16 @@ public class Menu extends JFrame{
                 String selectedNim = mahasiswaTable.getModel().getValueAt(selectedIndex, 1).toString();
                 String selectedNama = mahasiswaTable.getModel().getValueAt(selectedIndex, 2).toString();
                 String selectedJenisKelamin = mahasiswaTable.getModel().getValueAt(selectedIndex, 3).toString();
+                String selectedFaction = mahasiswaTable.getModel().getValueAt(selectedIndex, 4).toString();
 
                 // ubah isi textfield dan combo box
                 nimField.setText(selectedNim);
                 namaField.setText(selectedNama);
                 jenisKelaminComboBox.setSelectedItem(selectedJenisKelamin);
+                // untuk radio button harus di set masing-masing buttonnya
+                factionRadioButton1.setSelected(selectedFaction.equals("URNC"));
+                factionRadioButton2.setSelected(selectedFaction.equals("Yharnam"));
+                factionRadioButton3.setSelected(selectedFaction.equals("Committee of 300"));
 
                 // ubah button "Add" menjadi "Update"
                 addUpdateButton.setText("Update");
@@ -121,18 +135,19 @@ public class Menu extends JFrame{
 
     public final DefaultTableModel setTable() {
         // tentukan kolom tabel
-        Object[] columns = {"No", "NIM", "Nama", "Jenis Kelamin"};
+        Object[] columns = {"No", "NIM", "Nama", "Jenis Kelamin", "Faction"};
 
         // buat objek tabel dengan kolom yang sudah dibuat
         DefaultTableModel temp = new DefaultTableModel(null, columns);
 
         // isi tabel dengan listMahasiswa
         for(int i = 0; i < listMahasiswa.size(); i++){
-            Object[] row = new Object[4];
+            Object[] row = new Object[5];
             row[0] = i + 1;
             row[1] = listMahasiswa.get(i).getNim();
             row[2] = listMahasiswa.get(i).getNama();
             row[3] = listMahasiswa.get(i).getJenisKelamin();
+            row[4] = listMahasiswa.get(i).getFaction();
 
             temp.addRow(row);
         }
@@ -145,9 +160,20 @@ public class Menu extends JFrame{
         String nim = nimField.getText();
         String nama = namaField.getText();
         String jenisKelamin = jenisKelaminComboBox.getSelectedItem().toString();
+        // isi kosong dulu
+        String faction = "";
+        if(factionRadioButton1.isSelected()){
+            faction = "URNC";
+        }
+        else if(factionRadioButton2.isSelected()){
+            faction = "Yharnam";
+        }
+        else if(factionRadioButton3.isSelected()){
+            faction = "Committee of 300";
+        }
 
         // tambahkan data ke dalam list
-        listMahasiswa.add(new Mahasiswa(nim, nama, jenisKelamin));
+        listMahasiswa.add(new Mahasiswa(nim, nama, jenisKelamin, faction));
 
         // update tabel
         mahasiswaTable.setModel(setTable());
@@ -165,12 +191,23 @@ public class Menu extends JFrame{
         String nim = nimField.getText();
         String nama = namaField.getText();
         String jenisKelamin = jenisKelaminComboBox.getSelectedItem().toString();
-
+        // isi kosong dulu
+        String faction = "";
+        if(factionRadioButton1.isSelected()){
+            faction = "URNC";
+        }
+        else if(factionRadioButton2.isSelected()){
+            faction = "Yharnam";
+        }
+        else if(factionRadioButton3.isSelected()){
+            faction = "Committee of 300";
+        }
 
         // ubah data mahasiswa di list
         listMahasiswa.get(selectedIndex).setNama(nama);
         listMahasiswa.get(selectedIndex).setNim(nim);
         listMahasiswa.get(selectedIndex).setJenisKelamin(jenisKelamin);
+        listMahasiswa.get(selectedIndex).setFaction(faction);
 
         // update tabel
         mahasiswaTable.setModel(setTable());
@@ -206,6 +243,7 @@ public class Menu extends JFrame{
         nimField.setText("");
         namaField.setText("");
         jenisKelaminComboBox.setSelectedItem("");
+        factionRadioButton1.setSelected(false);
 
         // ubah button "Update" menjadi "Add"
         addUpdateButton.setText("Add");
@@ -216,25 +254,9 @@ public class Menu extends JFrame{
     }
 
     private void populateList() {
-        listMahasiswa.add(new Mahasiswa("2203999", "Amelia Zalfa Julianti", "Perempuan"));
-        listMahasiswa.add(new Mahasiswa("2202292", "Muhammad Iqbal Fadhilah", "Laki-laki"));
-        listMahasiswa.add(new Mahasiswa("2202346", "Muhammad Rifky Afandi", "Laki-laki"));
-        listMahasiswa.add(new Mahasiswa("2210239", "Muhammad Hanif Abdillah", "Laki-laki"));
-        listMahasiswa.add(new Mahasiswa("2202046", "Nurainun", "Perempuan"));
-        listMahasiswa.add(new Mahasiswa("2205101", "Kelvin Julian Putra", "Laki-laki"));
-        listMahasiswa.add(new Mahasiswa("2200163", "Rifanny Lysara Annastasya", "Perempuan"));
-        listMahasiswa.add(new Mahasiswa("2202869", "Revana Faliha Salma", "Perempuan"));
-        listMahasiswa.add(new Mahasiswa("2209489", "Rakha Dhifiargo Hariadi", "Laki-laki"));
-        listMahasiswa.add(new Mahasiswa("2203142", "Roshan Syalwan Nurilham", "Laki-laki"));
-        listMahasiswa.add(new Mahasiswa("2200311", "Raden Rahman Ismail", "Laki-laki"));
-        listMahasiswa.add(new Mahasiswa("2200978", "Ratu Syahirah Khairunnisa", "Perempuan"));
-        listMahasiswa.add(new Mahasiswa("2204509", "Muhammad Fahreza Fauzan", "Laki-laki"));
-        listMahasiswa.add(new Mahasiswa("2205027", "Muhammad Rizki Revandi", "Laki-laki"));
-        listMahasiswa.add(new Mahasiswa("2203484", "Arya Aydin Margono", "Laki-laki"));
-        listMahasiswa.add(new Mahasiswa("2200481", "Marvel Ravindra Dioputra", "Laki-laki"));
-        listMahasiswa.add(new Mahasiswa("2209889", "Muhammad Fadlul Hafiizh", "Laki-laki"));
-        listMahasiswa.add(new Mahasiswa("2206697", "Rifa Sania", "Perempuan"));
-        listMahasiswa.add(new Mahasiswa("2207260", "Imam Chalish Rafidhul Haque", "Laki-laki"));
-        listMahasiswa.add(new Mahasiswa("2204343", "Meiva Labibah Putri", "Perempuan"));
+        listMahasiswa.add(new Mahasiswa("2203999", "Miyashiro Takuru", "Laki-laki", "Committee of 300"));
+        listMahasiswa.add(new Mahasiswa("2203998", "Shiina Mayuri", "Perempuan", "URNC"));
+        listMahasiswa.add(new Mahasiswa("2203997", "Kurisu Makise", "Perempuan", "Yharnam"));
+
     }
 }
