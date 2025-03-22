@@ -103,6 +103,36 @@ public class Menu extends JFrame{
                 clearForm();
             }
         });
+
+        factionRadioButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(factionRadioButton1.isSelected()) {
+                    factionRadioButton2.setSelected(false);
+                    factionRadioButton3.setSelected(false);
+                }
+            }
+        });
+
+        factionRadioButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(factionRadioButton2.isSelected()) {
+                    factionRadioButton1.setSelected(false);
+                    factionRadioButton3.setSelected(false);
+                }
+            }
+        });
+
+        factionRadioButton3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(factionRadioButton3.isSelected()) {
+                    factionRadioButton1.setSelected(false);
+                    factionRadioButton2.setSelected(false);
+                }
+            }
+        });
         // saat salah satu baris tabel ditekan
         mahasiswaTable.addMouseListener(new MouseAdapter() {
             @Override
@@ -162,6 +192,7 @@ public class Menu extends JFrame{
         String jenisKelamin = jenisKelaminComboBox.getSelectedItem().toString();
         // isi kosong dulu
         String faction = "";
+        //pengecekkan radio button mana yang terpilih
         if(factionRadioButton1.isSelected()){
             faction = "URNC";
         }
@@ -193,6 +224,7 @@ public class Menu extends JFrame{
         String jenisKelamin = jenisKelaminComboBox.getSelectedItem().toString();
         // isi kosong dulu
         String faction = "";
+        //pengecekkan radio button mana yang terpilih
         if(factionRadioButton1.isSelected()){
             faction = "URNC";
         }
@@ -243,7 +275,10 @@ public class Menu extends JFrame{
         nimField.setText("");
         namaField.setText("");
         jenisKelaminComboBox.setSelectedItem("");
+        //biar ga ada yang kepilih
         factionRadioButton1.setSelected(false);
+        factionRadioButton2.setSelected(false);
+        factionRadioButton3.setSelected(false);
 
         // ubah button "Update" menjadi "Add"
         addUpdateButton.setText("Add");
